@@ -6,7 +6,7 @@
 %define geminstdir %{gemdir}/gems/%{gemname}-%{version}
 
 Summary: Easy and robust Ruby web application deployment
-Name: rubygem-%{gemname}
+Name: ruby-enterprise-rubygem-%{gemname}
 Version: 3.0.0
 Release: 1%{?dist}
 Group: Development/Languages
