@@ -64,7 +64,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %{_bindir}/*
 %{_prefix}/lib/*
-%{_prefix}/share/man/man1/ruby.1.gz
+%{_prefix}/share/man/man1/ruby.1
 %doc source/ChangeLog
 %doc source/COPYING
 %doc source/LEGAL
