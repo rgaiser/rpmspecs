@@ -1,0 +1,3 @@
+To use another "prefix":
+
+rpmbuild -bb ruby-enterprise.spec --define '_prefix /usr/local'
