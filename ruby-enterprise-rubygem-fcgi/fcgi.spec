@@ -1,7 +1,6 @@
 # Generated from fcgi-0.8.8.gem by gem2rpm -*- rpm-spec -*-
-%define ruby /usr/local/bin/ruby
-%define ruby_sitelib %(ruby -rrbconfig -e "puts Config::CONFIG['sitelibdir']")
-%define gemdir %(ruby -rubygems -e 'puts Gem::dir' 2>/dev/null)
+%define ruby_sitelib %(%{ruby} -rrbconfig -e "puts Config::CONFIG['sitelibdir']")
+%define gemdir %(%{ruby} -rubygems -e 'puts Gem::dir' 2>/dev/null)
 %define gemname fcgi
 %define geminstdir %{gemdir}/gems/%{gemname}-%{version}
 
@@ -23,8 +22,23 @@ FastCGI is a language independent, scalable, open extension to CGI that
 provides high performance without the limitations of server specific APIs. For
 more information, see http://www.fastcgi.com/.
 
-
 %prep
+
+if ! [ -e %{ruby} ]; then
+    echo "Please provide your ruby enterprise path"
+    echo "%{ruby} does not exists"
+    echo "Use: --define 'ruby ruby path'"
+    exit 1
+fi
+
+rubyrpm=`rpm -q --whatprovides %{ruby}`
+
+if ! [[ $rubyrpm =~ ^ruby-enterprise ]]; then
+    echo "Please provide your ruby enterprise path"
+    echo "%{ruby} it's not from the ruby-enterprise RPM"
+    echo "Use: --define 'ruby ruby path'"
+    exit 1
+fi
 
 %build
 

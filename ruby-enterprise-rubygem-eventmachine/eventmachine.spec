@@ -1,36 +1,33 @@
-# Generated from rack-1.2.1.gem by gem2rpm -*- rpm-spec -*-
+# Generated from eventmachine-0.12.10.gem by gem2rpm -*- rpm-spec -*-
 %define ruby_sitelib %(%{ruby} -rrbconfig -e "puts Config::CONFIG['sitelibdir']")
 %define gemdir %(%{ruby} -rubygems -e 'puts Gem::dir' 2>/dev/null)
-%define gemname rack
+%define gemname eventmachine
 %define geminstdir %{gemdir}/gems/%{gemname}-%{version}
 
-Summary: a modular Ruby webserver interface
+Summary: Ruby/EventMachine library
 Name: ruby-enterprise-rubygem-%{gemname}
-Version: 1.2.1
+Version: 0.12.10
 Release: 1%{?dist}
 Group: Development/Languages
 License: GPLv2+ or Ruby
-URL: http://rack.rubyforge.org
+URL: http://rubyeventmachine.com
 Source0: http://rubygems.org/gems/%{gemname}-%{version}.gem
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: ruby-enterprise-rubygems
-Requires: ruby-enterprise-rubygem(bacon) >= 0
-Requires: ruby-enterprise-rubygem(rake) >= 0
-Requires: ruby-enterprise-rubygem(fcgi) >= 0
-Requires: ruby-enterprise-rubygem(memcache-client) >= 0
-Requires: ruby-enterprise-rubygem(mongrel) >= 0
-Requires: ruby-enterprise-rubygem(thin) >= 0
 BuildRequires: ruby-enterprise-rubygems
-BuildArch: noarch
 Provides: ruby-enterprise-rubygem(%{gemname}) = %{version}
 
 %description
-Rack provides minimal, modular and adaptable interface for developing
-web applications in Ruby.  By wrapping HTTP requests and responses in
-the simplest way possible, it unifies and distills the API for web
-servers, web frameworks, and software in between (the so-called
-middleware) into a single method call.
-Also see http://rack.rubyforge.org.
+EventMachine implements a fast, single-threaded engine for arbitrary network
+communications. It's extremely easy to use in Ruby. EventMachine wraps all
+interactions with IP sockets, allowing programs to concentrate on the
+implementation of network protocols. It can be used to create both network
+servers and clients. To create a server or client, a Ruby program only needs
+to specify the IP address and port, and provide a Module that implements the
+communications protocol. Implementations of several standard network protocols
+are provided with the package, primarily to serve as examples. The real goal
+of EventMachine is to enable programs to easily interface with other programs
+using TCP/IP, especially if custom protocols are required.
 
 %prep
 
@@ -57,26 +54,18 @@ rm -rf %{buildroot}
 mkdir -p %{buildroot}%{gemdir}
 gem install --local --install-dir %{buildroot}%{gemdir} \
             --force --rdoc %{SOURCE0}
-mkdir -p %{buildroot}/%{_bindir}
-mv %{buildroot}%{gemdir}/bin/* %{buildroot}/%{_bindir}
-rmdir %{buildroot}%{gemdir}/bin
-find %{buildroot}%{geminstdir}/bin -type f | xargs chmod a+x
 
 %clean
 rm -rf %{buildroot}
 
 %files
 %defattr(-, root, root, -)
-%{_bindir}/rackup
 %{gemdir}/gems/%{gemname}-%{version}/
 %doc %{gemdir}/doc/%{gemname}-%{version}
-%doc %{geminstdir}/README
-%doc %{geminstdir}/SPEC
-%doc %{geminstdir}/KNOWN-ISSUES
 %{gemdir}/cache/%{gemname}-%{version}.gem
 %{gemdir}/specifications/%{gemname}-%{version}.gemspec
 
 
 %changelog
-* Thu Nov 11 2010 Roberto Gaiser <rgaiser@optimus.local> - 1.2.1-1
+* Fri Nov 12 2010 Roberto Gaiser <rgaiser@optimus.local> - 0.12.10-1
 - Initial package

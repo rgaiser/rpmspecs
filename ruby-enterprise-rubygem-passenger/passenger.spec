@@ -1,7 +1,6 @@
 # Generated from passenger-3.0.0.gem by gem2rpm -*- rpm-spec -*-
-%define ruby /usr/local/bin/ruby
-%define ruby_sitelib %(ruby -rrbconfig -e "puts Config::CONFIG['sitelibdir']")
-%define gemdir %(ruby -rubygems -e 'puts Gem::dir' 2>/dev/null)
+%define ruby_sitelib %(%{ruby} -rrbconfig -e "puts Config::CONFIG['sitelibdir']")
+%define gemdir %(%{ruby} -rubygems -e 'puts Gem::dir' 2>/dev/null)
 %define gemname passenger
 %define geminstdir %{gemdir}/gems/%{gemname}-%{version}
 
@@ -27,8 +26,23 @@ Provides: ruby-enterprise-rubygem(%{gemname}) = %{version}
 %description
 Easy and robust Ruby web application deployment.
 
-
 %prep
+
+if ! [ -e %{ruby} ]; then
+    echo "Please provide your ruby enterprise path"
+    echo "%{ruby} does not exists"
+    echo "Use: --define 'ruby ruby path'"
+    exit 1
+fi
+
+rubyrpm=`rpm -q --whatprovides %{ruby}`
+
+if ! [[ $rubyrpm =~ ^ruby-enterprise ]]; then
+    echo "Please provide your ruby enterprise path"
+    echo "%{ruby} it's not from the ruby-enterprise RPM"
+    echo "Use: --define 'ruby ruby path'"
+    exit 1
+fi
 
 %build
 
