@@ -1,5 +1,7 @@
 To build use:
 
+copy the .patch to the SOURCES directory on the _topdir of the rpmbuild environment
+
 rpmbuild -bb <specfile> --define 'ruby <ruby-enterprise install dir>/bin/ruby>'
 
 Error?

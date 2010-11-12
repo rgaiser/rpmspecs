@@ -1,0 +1,37 @@
+diff --git a/test/stub/rails_apps/2.3/mycook/public/dispatch.cgi b/test/stub/rails_apps/2.3/mycook/public/dispatch.cgi
+index 3848806..32fa3b2 100755
+--- a/test/stub/rails_apps/2.3/mycook/public/dispatch.cgi
++++ b/test/stub/rails_apps/2.3/mycook/public/dispatch.cgi
+@@ -1,4 +1,4 @@
+-#!/usr/bin/ruby1.8
++#!/usr/bin/env ruby
+ 
+ require File.dirname(__FILE__) + "/../config/environment" unless defined?(RAILS_ROOT)
+ 
+@@ -7,4 +7,4 @@ require File.dirname(__FILE__) + "/../config/environment" unless defined?(RAILS_
+ require "dispatcher"
+ 
+ ADDITIONAL_LOAD_PATHS.reverse.each { |dir| $:.unshift(dir) if File.directory?(dir) } if defined?(Apache::RubyRun)
+-Dispatcher.dispatch
+\ No newline at end of file
++Dispatcher.dispatch
+diff --git a/test/stub/rails_apps/2.3/mycook/public/dispatch.fcgi b/test/stub/rails_apps/2.3/mycook/public/dispatch.fcgi
+index 3169ba2..664dbbb 100755
+--- a/test/stub/rails_apps/2.3/mycook/public/dispatch.fcgi
++++ b/test/stub/rails_apps/2.3/mycook/public/dispatch.fcgi
+@@ -1,4 +1,4 @@
+-#!/usr/bin/ruby1.8
++#!/usr/bin/env ruby
+ #
+ # You may specify the path to the FastCGI crash log (a log of unhandled
+ # exceptions which forced the FastCGI instance to exit, great for debugging)
+diff --git a/test/stub/rails_apps/2.3/mycook/public/dispatch.rb b/test/stub/rails_apps/2.3/mycook/public/dispatch.rb
+index 430812d..32fa3b2 100755
+--- a/test/stub/rails_apps/2.3/mycook/public/dispatch.rb
++++ b/test/stub/rails_apps/2.3/mycook/public/dispatch.rb
+@@ -1,4 +1,4 @@
+-#!/usr/bin/ruby1.8
++#!/usr/bin/env ruby
+ 
+ require File.dirname(__FILE__) + "/../config/environment" unless defined?(RAILS_ROOT)
+ 

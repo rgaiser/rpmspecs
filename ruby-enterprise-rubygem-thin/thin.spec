@@ -12,6 +12,7 @@ Group: Development/Languages
 License: GPLv2+ or Ruby
 URL: http://code.macournoyer.com/thin/
 Source0: http://rubygems.org/gems/%{gemname}-%{version}.gem
+Source1: thin-gem-no-hardcoded-ruby.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: ruby-enterprise-rubygems
 Requires: ruby-enterprise-rubygem(rack) >= 1.0.0
@@ -48,6 +49,9 @@ rm -rf %{buildroot}
 mkdir -p %{buildroot}%{gemdir}
 gem install --local --install-dir %{buildroot}%{gemdir} \
             --force --rdoc %{SOURCE0}
+
+patch -p1 -d %{buildroot}%{gemdir}/gems/%{gemname}-%{version} < %{SOURCE1}
+
 mkdir -p %{buildroot}/%{_bindir}
 mv %{buildroot}%{gemdir}/bin/* %{buildroot}/%{_bindir}
 rmdir %{buildroot}%{gemdir}/bin

@@ -1,0 +1,94 @@
+diff --git a/example/monit_sockets b/example/monit_sockets
+index 0af51e9..a41d0f6 100644
+--- a/example/monit_sockets
++++ b/example/monit_sockets
+@@ -1,7 +1,7 @@
+ check process blog1
+     with pidfile /u/apps/blog/shared/pids/thin.14000.pid
+-    start program = "/usr/local/bin/ruby /usr/local/bin/thin start -d -e production -u nobody -g nobody -p 14000 -a 127.0.0.1 -P tmp/pids/thin.14000.pid -c /u/apps/blog/current"
+-    stop program  = "/usr/local/bin/ruby /usr/local/bin/thin stop -P /u/apps/blog/shared/pids/thin.14000.pid"
++    start program = "/usr/bin/env ruby thin start -d -e production -u nobody -g nobody -p 14000 -a 127.0.0.1 -P tmp/pids/thin.14000.pid -c /u/apps/blog/current"
++    stop program  = "/usr/bin/env ruby thin stop -P /u/apps/blog/shared/pids/thin.14000.pid"
+     if totalmem > 90.0 MB for 5 cycles then restart
+     if failed port 14000 then restart
+     if cpu usage > 95% for 3 cycles then restart
+@@ -10,8 +10,8 @@ check process blog1
+ 
+ check process blog2
+     with pidfile /u/apps/blog/shared/pids/thin.14001.pid
+-    start program = "/usr/local/bin/ruby /usr/local/bin/thin start -d -e production -u nobody -g nobody -p 14001 -a 127.0.0.1 -P tmp/pids/thin.14001.pid -c /u/apps/blog/current"
+-    stop program  = "/usr/local/bin/ruby /usr/local/bin/thin stop -P /u/apps/blog/shared/pids/thin.14001.pid"
++    start program = "/usr/bin/env ruby thin start -d -e production -u nobody -g nobody -p 14001 -a 127.0.0.1 -P tmp/pids/thin.14001.pid -c /u/apps/blog/current"
++    stop program  = "/usr/bin/env ruby thin stop -P /u/apps/blog/shared/pids/thin.14001.pid"
+     if totalmem > 90.0 MB for 5 cycles then restart
+     if failed port 14001 then restart
+     if cpu usage > 95% for 3 cycles then restart
+diff --git a/example/monit_unixsock b/example/monit_unixsock
+index 445bffa..f63266c 100644
+--- a/example/monit_unixsock
++++ b/example/monit_unixsock
+@@ -1,7 +1,7 @@
+ check process blog1
+     with pidfile /u/apps/blog/shared/pids/thin.1.pid
+-    start program = "/usr/local/bin/ruby /usr/local/bin/thin start -d -e production -S /u/apps/blog/shared/pids/thin.1.sock -P tmp/pids/thin.1.pid -c /u/apps/blog/current"
+-    stop program  = "/usr/local/bin/ruby /usr/local/bin/thin stop -P /u/apps/blog/shared/pids/thin.1.pid"
++    start program = "/usr/bin/env ruby thin start -d -e production -S /u/apps/blog/shared/pids/thin.1.sock -P tmp/pids/thin.1.pid -c /u/apps/blog/current"
++    stop program  = "/usr/bin/env ruby thin stop -P /u/apps/blog/shared/pids/thin.1.pid"
+     if totalmem > 90.0 MB for 5 cycles then restart
+ 		if failed unixsocket /u/apps/blog/shared/pids/thin.1.sock then restart
+     if cpu usage > 95% for 3 cycles then restart
+@@ -10,8 +10,8 @@ check process blog1
+ 
+ check process blog2
+     with pidfile /u/apps/blog/shared/pids/thin.2.pid
+-    start program = "/usr/local/bin/ruby /usr/local/bin/thin start -d -e production -S /u/apps/blog/shared/pids/thin.2.sock -P tmp/pids/thin.2.pid -c /u/apps/blog/current"
+-    stop program  = "/usr/local/bin/ruby /usr/local/bin/thin stop -P /u/apps/blog/shared/pids/thin.2.pid"
++    start program = "/usr/bin/env ruby thin start -d -e production -S /u/apps/blog/shared/pids/thin.2.sock -P tmp/pids/thin.2.pid -c /u/apps/blog/current"
++    stop program  = "/usr/bin/env ruby thin stop -P /u/apps/blog/shared/pids/thin.2.pid"
+     if totalmem > 90.0 MB for 5 cycles then restart
+ 		if failed unixsocket /u/apps/blog/shared/pids/thin.2.sock then restart
+     if cpu usage > 95% for 3 cycles then restart
+diff --git a/spec/rails_app/public/dispatch.cgi b/spec/rails_app/public/dispatch.cgi
+index 9b5ae76..32fa3b2 100755
+--- a/spec/rails_app/public/dispatch.cgi
++++ b/spec/rails_app/public/dispatch.cgi
+@@ -1,4 +1,4 @@
+-#!/usr/local/bin/ruby
++#!/usr/bin/env ruby
+ 
+ require File.dirname(__FILE__) + "/../config/environment" unless defined?(RAILS_ROOT)
+ 
+@@ -7,4 +7,4 @@ require File.dirname(__FILE__) + "/../config/environment" unless defined?(RAILS_
+ require "dispatcher"
+ 
+ ADDITIONAL_LOAD_PATHS.reverse.each { |dir| $:.unshift(dir) if File.directory?(dir) } if defined?(Apache::RubyRun)
+-Dispatcher.dispatch
+\ No newline at end of file
++Dispatcher.dispatch
+diff --git a/spec/rails_app/public/dispatch.fcgi b/spec/rails_app/public/dispatch.fcgi
+index 65188f3..664dbbb 100755
+--- a/spec/rails_app/public/dispatch.fcgi
++++ b/spec/rails_app/public/dispatch.fcgi
+@@ -1,4 +1,4 @@
+-#!/usr/local/bin/ruby
++#!/usr/bin/env ruby
+ #
+ # You may specify the path to the FastCGI crash log (a log of unhandled
+ # exceptions which forced the FastCGI instance to exit, great for debugging)
+diff --git a/spec/rails_app/public/dispatch.rb b/spec/rails_app/public/dispatch.rb
+index 9b5ae76..32fa3b2 100755
+--- a/spec/rails_app/public/dispatch.rb
++++ b/spec/rails_app/public/dispatch.rb
+@@ -1,4 +1,4 @@
+-#!/usr/local/bin/ruby
++#!/usr/bin/env ruby
+ 
+ require File.dirname(__FILE__) + "/../config/environment" unless defined?(RAILS_ROOT)
+ 
+@@ -7,4 +7,4 @@ require File.dirname(__FILE__) + "/../config/environment" unless defined?(RAILS_
+ require "dispatcher"
+ 
+ ADDITIONAL_LOAD_PATHS.reverse.each { |dir| $:.unshift(dir) if File.directory?(dir) } if defined?(Apache::RubyRun)
+-Dispatcher.dispatch
+\ No newline at end of file
++Dispatcher.dispatch

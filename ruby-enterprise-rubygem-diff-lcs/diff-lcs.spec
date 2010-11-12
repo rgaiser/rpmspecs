@@ -1,31 +1,29 @@
-# Generated from passenger-3.0.0.gem by gem2rpm -*- rpm-spec -*-
+# Generated from diff-lcs-1.1.2.gem by gem2rpm -*- rpm-spec -*-
 %define ruby_sitelib %(%{ruby} -rrbconfig -e "puts Config::CONFIG['sitelibdir']")
 %define gemdir %(%{ruby} -rubygems -e 'puts Gem::dir' 2>/dev/null)
-%define gemname passenger
+%define gemname diff-lcs
 %define geminstdir %{gemdir}/gems/%{gemname}-%{version}
 
-Summary: Easy and robust Ruby web application deployment
+Summary: Provides a list of changes that represent the difference between two sequenced collections
 Name: ruby-enterprise-rubygem-%{gemname}
-Version: 3.0.0
+Version: 1.1.2
 Release: 1%{?dist}
 Group: Development/Languages
 License: GPLv2+ or Ruby
-URL: http://www.modrails.com/
+URL: http://rubyforge.org/projects/ruwiki/
 Source0: http://rubygems.org/gems/%{gemname}-%{version}.gem
-Source1: passenger-gem-no-hardcoded-ruby.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: ruby-enterprise-rubygems
-Requires: ruby-enterprise-rubygem(rake) >= 0.8.1
-Requires: ruby-enterprise-rubygem(fastthread) >= 1.0.1
-Requires: ruby-enterprise-rubygem(daemon_controller) >= 0.2.5
-Requires: ruby-enterprise-rubygem(file-tail) >= 0
-Requires: ruby-enterprise-rubygem(rack) >= 0
 BuildRequires: ruby-enterprise-rubygems
 BuildArch: noarch
 Provides: ruby-enterprise-rubygem(%{gemname}) = %{version}
 
 %description
-Easy and robust Ruby web application deployment.
+Diff::LCS is a port of Algorithm::Diff that uses the McIlroy-Hunt longest
+common subsequence (LCS) algorithm to compute intelligent differences between
+two sequenced enumerable containers. The implementation is based on Mario I.
+Wolczko's Smalltalk version (1.2, 1993) and Ned Konz's Perl version
+(Algorithm::Diff).
 
 %prep
 
@@ -52,9 +50,6 @@ rm -rf %{buildroot}
 mkdir -p %{buildroot}%{gemdir}
 gem install --local --install-dir %{buildroot}%{gemdir} \
             --force --rdoc %{SOURCE0}
-
-patch -p1 -d %{buildroot}%{gemdir}/gems/%{gemname}-%{version} < %{SOURCE1}
-
 mkdir -p %{buildroot}/%{_bindir}
 mv %{buildroot}%{gemdir}/bin/* %{buildroot}/%{_bindir}
 rmdir %{buildroot}%{gemdir}/bin
@@ -65,21 +60,17 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-, root, root, -)
-%{_bindir}/passenger
-%{_bindir}/passenger-install-apache2-module
-%{_bindir}/passenger-install-nginx-module
-%{_bindir}/passenger-config
-%{_bindir}/passenger-stress-test
-%{_bindir}/passenger-status
-%{_bindir}/passenger-memory-stats
-%{_bindir}/passenger-make-enterprisey
+%{_bindir}/ldiff
+%{_bindir}/htmldiff
 %{gemdir}/gems/%{gemname}-%{version}/
 %doc %{gemdir}/doc/%{gemname}-%{version}
 %doc %{geminstdir}/README
+%doc %{geminstdir}/ChangeLog
+%doc %{geminstdir}/Install
 %{gemdir}/cache/%{gemname}-%{version}.gem
 %{gemdir}/specifications/%{gemname}-%{version}.gemspec
 
 
 %changelog
-* Thu Nov 11 2010 Roberto Gaiser <rgaiser@optimus.local> - 3.0.0-1
+* Fri Nov 12 2010 Roberto Gaiser <rgaiser@optimus.local> - 1.1.2-1
 - Initial package
