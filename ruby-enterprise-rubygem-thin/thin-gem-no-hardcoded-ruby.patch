@@ -1,5 +1,5 @@
 diff --git a/example/monit_sockets b/example/monit_sockets
-index 0af51e9..a41d0f6 100644
+index 0af51e9..15e9c43 100644
 --- a/example/monit_sockets
 +++ b/example/monit_sockets
 @@ -1,7 +1,7 @@
@@ -7,8 +7,8 @@ index 0af51e9..a41d0f6 100644
      with pidfile /u/apps/blog/shared/pids/thin.14000.pid
 -    start program = "/usr/local/bin/ruby /usr/local/bin/thin start -d -e production -u nobody -g nobody -p 14000 -a 127.0.0.1 -P tmp/pids/thin.14000.pid -c /u/apps/blog/current"
 -    stop program  = "/usr/local/bin/ruby /usr/local/bin/thin stop -P /u/apps/blog/shared/pids/thin.14000.pid"
-+    start program = "/usr/bin/env ruby thin start -d -e production -u nobody -g nobody -p 14000 -a 127.0.0.1 -P tmp/pids/thin.14000.pid -c /u/apps/blog/current"
-+    stop program  = "/usr/bin/env ruby thin stop -P /u/apps/blog/shared/pids/thin.14000.pid"
++    start program = "ruby thin start -d -e production -u nobody -g nobody -p 14000 -a 127.0.0.1 -P tmp/pids/thin.14000.pid -c /u/apps/blog/current"
++    stop program  = "ruby thin stop -P /u/apps/blog/shared/pids/thin.14000.pid"
      if totalmem > 90.0 MB for 5 cycles then restart
      if failed port 14000 then restart
      if cpu usage > 95% for 3 cycles then restart
@@ -18,13 +18,13 @@ index 0af51e9..a41d0f6 100644
      with pidfile /u/apps/blog/shared/pids/thin.14001.pid
 -    start program = "/usr/local/bin/ruby /usr/local/bin/thin start -d -e production -u nobody -g nobody -p 14001 -a 127.0.0.1 -P tmp/pids/thin.14001.pid -c /u/apps/blog/current"
 -    stop program  = "/usr/local/bin/ruby /usr/local/bin/thin stop -P /u/apps/blog/shared/pids/thin.14001.pid"
-+    start program = "/usr/bin/env ruby thin start -d -e production -u nobody -g nobody -p 14001 -a 127.0.0.1 -P tmp/pids/thin.14001.pid -c /u/apps/blog/current"
-+    stop program  = "/usr/bin/env ruby thin stop -P /u/apps/blog/shared/pids/thin.14001.pid"
++    start program = "ruby thin start -d -e production -u nobody -g nobody -p 14001 -a 127.0.0.1 -P tmp/pids/thin.14001.pid -c /u/apps/blog/current"
++    stop program  = "ruby thin stop -P /u/apps/blog/shared/pids/thin.14001.pid"
      if totalmem > 90.0 MB for 5 cycles then restart
      if failed port 14001 then restart
      if cpu usage > 95% for 3 cycles then restart
 diff --git a/example/monit_unixsock b/example/monit_unixsock
-index 445bffa..f63266c 100644
+index 445bffa..e5e0e33 100644
 --- a/example/monit_unixsock
 +++ b/example/monit_unixsock
 @@ -1,7 +1,7 @@
@@ -32,8 +32,8 @@ index 445bffa..f63266c 100644
      with pidfile /u/apps/blog/shared/pids/thin.1.pid
 -    start program = "/usr/local/bin/ruby /usr/local/bin/thin start -d -e production -S /u/apps/blog/shared/pids/thin.1.sock -P tmp/pids/thin.1.pid -c /u/apps/blog/current"
 -    stop program  = "/usr/local/bin/ruby /usr/local/bin/thin stop -P /u/apps/blog/shared/pids/thin.1.pid"
-+    start program = "/usr/bin/env ruby thin start -d -e production -S /u/apps/blog/shared/pids/thin.1.sock -P tmp/pids/thin.1.pid -c /u/apps/blog/current"
-+    stop program  = "/usr/bin/env ruby thin stop -P /u/apps/blog/shared/pids/thin.1.pid"
++    start program = "ruby thin start -d -e production -S /u/apps/blog/shared/pids/thin.1.sock -P tmp/pids/thin.1.pid -c /u/apps/blog/current"
++    stop program  = "ruby thin stop -P /u/apps/blog/shared/pids/thin.1.pid"
      if totalmem > 90.0 MB for 5 cycles then restart
  		if failed unixsocket /u/apps/blog/shared/pids/thin.1.sock then restart
      if cpu usage > 95% for 3 cycles then restart
@@ -43,8 +43,8 @@ index 445bffa..f63266c 100644
      with pidfile /u/apps/blog/shared/pids/thin.2.pid
 -    start program = "/usr/local/bin/ruby /usr/local/bin/thin start -d -e production -S /u/apps/blog/shared/pids/thin.2.sock -P tmp/pids/thin.2.pid -c /u/apps/blog/current"
 -    stop program  = "/usr/local/bin/ruby /usr/local/bin/thin stop -P /u/apps/blog/shared/pids/thin.2.pid"
-+    start program = "/usr/bin/env ruby thin start -d -e production -S /u/apps/blog/shared/pids/thin.2.sock -P tmp/pids/thin.2.pid -c /u/apps/blog/current"
-+    stop program  = "/usr/bin/env ruby thin stop -P /u/apps/blog/shared/pids/thin.2.pid"
++    start program = "ruby thin start -d -e production -S /u/apps/blog/shared/pids/thin.2.sock -P tmp/pids/thin.2.pid -c /u/apps/blog/current"
++    stop program  = "ruby thin stop -P /u/apps/blog/shared/pids/thin.2.pid"
      if totalmem > 90.0 MB for 5 cycles then restart
  		if failed unixsocket /u/apps/blog/shared/pids/thin.2.sock then restart
      if cpu usage > 95% for 3 cycles then restart
