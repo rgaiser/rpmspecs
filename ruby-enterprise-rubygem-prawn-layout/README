@@ -1,0 +1,7 @@
+To build use:
+
+rpmbuild -bb <specfile> --define 'ruby <ruby-enterprise install dir>/bin/ruby>'
+
+Error?
+
+* Did you add "<ruby-enterprise install dir>/bin" to the PATH?

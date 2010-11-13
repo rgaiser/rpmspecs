@@ -1,0 +1,20 @@
+diff --git a/bin/racc2y b/bin/racc2y
+index f88d73e..74e49cf 100755
+--- a/bin/racc2y
++++ b/bin/racc2y
+@@ -1,4 +1,4 @@
+-#!/usr/local/bin/ruby
++#!/usr/bin/env ruby
+ #
+ # $Id$
+ #
+diff --git a/bin/y2racc b/bin/y2racc
+index 38bd366..d0e82a6 100755
+--- a/bin/y2racc
++++ b/bin/y2racc
+@@ -1,4 +1,4 @@
+-#!/usr/local/bin/ruby
++#!/usr/bin/env ruby
+ #
+ # $Id$
+ #
