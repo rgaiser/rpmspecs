@@ -14,7 +14,6 @@ Source0: ruby-enterprise-%{version}-%{phusion_release}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{phusion_release}-root-%(%{__id_u} -n)
 BuildRequires: make patch gcc-c++ glibc-devel
 BuildRequires: openssl-devel readline-devel
-#BuildRequires: ruby
 
 %description 
 Ruby Enterprise Edition is a server-oriented friendly branch of Ruby which includes various enhancements:

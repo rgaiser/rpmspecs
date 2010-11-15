@@ -1,0 +1,10 @@
+diff --git a/ext/yaml_nodes.rb b/ext/yaml_nodes.rb
+index 2174da0..97100e4 100755
+--- a/ext/yaml_nodes.rb
++++ b/ext/yaml_nodes.rb
+@@ -1,4 +1,4 @@
+-#!/usr/bin/ruby
++#!/usr/bin/env ruby
+ #
+ # = Synopsis
+ #

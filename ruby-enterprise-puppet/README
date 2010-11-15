@@ -1,0 +1,3 @@
+To build use:
+
+rpmbuild -bb puppet.spec --define 'ruby <ruby-enterprise install dir>/bin/ruby' --without selinux --without augeas
